@@ -1,7 +1,9 @@
 <?php
     include 'header.php';
     include 'connect.php';
-                session_start();
+                if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 <html>
     <head>
@@ -11,7 +13,7 @@
     </head> 
     <body>
     <?php        
-        if(!isset($_COOKIE["PHPSESSID"])||$_SESSION['signed_in']!='true')
+        if(!isset($_COOKIE["PHPSESSID"])||!isset($_SESSION['signed_in'])||$_SESSION['signed_in']==false)
             echo'<a href="login.php">Login first</a><br>';
         else
         {
@@ -46,6 +48,7 @@
                 }
             }
         }    
+    include 'followthread.php';
     ?>
     </body>
 </html>
